@@ -1,3 +1,9 @@
-numpy
 streamlit
+numpy
 matplotlib
+pillow
+requests
+torch
+torchvision
+nltk
+PyPDF2
