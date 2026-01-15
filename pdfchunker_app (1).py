@@ -3,7 +3,19 @@ import nltk
 from PyPDF2 import PdfReader
 
 # Ensure punkt is available
-nltk.download("punkt", quiet=True)
+@st.cache_resource
+def download_nltk_resources():
+    try:
+        nltk.data.find("tokenizers/punkt")
+    except LookupError:
+        nltk.download("punkt")
+
+    try:
+        nltk.data.find("tokenizers/punkt_tab")
+    except LookupError:
+        nltk.download("punkt_tab")
+
+download_nltk_resources()
 
 st.set_page_config(page_title="PDF Sentence Chunker (NLTK)", layout="wide")
 
@@ -63,3 +75,4 @@ if uploaded_file is not None:
         st.error(f"Error reading PDF: {e}")
 else:
     st.info("Please upload a PDF to begin.")
+
